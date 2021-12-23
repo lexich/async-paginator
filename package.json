@@ -7,6 +7,10 @@
     "./lib/index.cjs.js": "./lib/index.browser.esm.js",
     "./lib/index.esm.js": "./lib/index.browser.esm.js"
   },
+  "files": [
+    "/lib",
+    "/src"
+  ],
   "version": "1.0.0",
   "description": "Async pagination for big collections",
   "scripts": {
