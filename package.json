@@ -15,7 +15,7 @@
   "description": "Async pagination for big collections",
   "scripts": {
     "test": "jest src",
-    "build": "rollup -c"
+    "build": "rimraf lib && rollup -c"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "@rollup/plugin-node-resolve": "^13.1.1",
     "@types/jest": "^27.0.3",
     "jest": "^27.4.5",
+    "rimraf": "^3.0.2",
     "rollup": "^2.61.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.1",
