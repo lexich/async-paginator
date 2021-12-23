@@ -1,22 +1,28 @@
 {
-  "name": "paginator",
+  "name": "async-paginator",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "browser": {
+    "./lib/index.cjs.js": "./lib/index.browser.esm.js",
+    "./lib/index.esm.js": "./lib/index.browser.esm.js"
+  },
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Async pagination for big collections",
   "scripts": {
     "test": "jest src",
     "build": "rollup -c"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lexich/paginator.git"
+    "url": "git+https://github.com/lexich/async-paginator.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Efremov Alexey <lexich121@gmail.com>",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lexich/paginator/issues"
+    "url": "https://github.com/lexich/async-paginator/issues"
   },
-  "homepage": "https://github.com/lexich/paginator#readme",
+  "homepage": "https://github.com/lexich/async-paginator#readme",
   "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.1",
