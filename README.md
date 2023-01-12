@@ -2,8 +2,6 @@
 
 ## Smart pagination for big collections
 
-Documentation: Work in progress....
-
 Ordered paginator
 ```ts
 import { paginator } from 'async-paginator';
