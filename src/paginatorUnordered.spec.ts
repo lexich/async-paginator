@@ -35,4 +35,34 @@ describe('paginatorUnordered', () => {
     expect(ordered).toEqual([1, 2, 3]);
     expect(result).toEqual([2, 3, 1]);
   });
+
+  it('test1', async () => {
+    const sleep = (delay: number) =>
+      new Promise<void>((resolve) => setTimeout(resolve, delay));
+
+    const paginate = paginatorUnordered(
+      [1, 2, 3, 4, 5, 6, 7, 8],
+      async (num) => {
+        if (num % 2 === 0) {
+          await sleep(10); // timeout 10ms
+        }
+        return num * 10;
+      },
+      {
+        offset: 1,
+        chunks: 2,
+        mode: 'chunks',
+      }
+    );
+
+    const result: number[] = [];
+
+    for await (const item of paginate) {
+      if (!(item instanceof PaginationAsyncError)) {
+        result.push(item.data);
+      }
+    }
+
+    expect(result).toEqual([30, 20, 50, 40, 70, 60, 80]);
+  });
 });
