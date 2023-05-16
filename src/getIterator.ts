@@ -1,3 +1,13 @@
+/**
+ * Returns an iterator for a given list, with optional offset and limit parameters.
+ *
+ * @function
+ * @template T - The type of data being iterated over.
+ * @param {Iterable<T> | T[]} list - The list to iterate over.
+ * @param {number} [offset=0] - The starting index for the iterator.
+ * @param {number} [limit] - The maximum number of items to include in the iteration.
+ * @returns {Iterator<T>} An iterator for the list.
+ */
 export function getIterator<T>(
   list: Iterable<T> | T[],
   offset = 0,

@@ -1,15 +1,79 @@
+/**
+ * The ISmartSequence interface defines the shape of objects that can be used in the SmartSequence class.
+ *
+ * @interface
+ * @template T - The type of elements in the collection
+ */
 export interface ISmartSequence<T> {
+  /**
+   * An iterable collection of elements to iterate over.
+   * This property is optional and defaults to an empty array.
+   *
+   * @type {Iterable<T>}
+   * @memberof ISmartSequence
+   * @default []
+   */
   collection?: Iterable<T>;
+
+  /**
+   * A function that merges an array of type T into a single element of type T
+   * This property is optional and is not set by default.
+   *
+   * @param {T[]} list - The input array of elements
+   * @returns {T} - A merged element of type T
+   * @memberof ISmartSequence
+   */
   merge?(list: T[]): T[];
 }
+
+/**
+ * The SmartSequence class implements the Iterable interface and provides
+ * advanced iteration capabilities for collections
+ *
+ * @class
+ * @implements {Iterable<T>}
+ * @template T - The type of elements in the collection
+ */
 export class SmartSequence<T> implements Iterable<T> {
+  /**
+   * A private method that merges an array of type T into a single element of type T
+   *
+   * @private
+   * @readonly
+   * @type {((list: T[]) => T[] | undefined)}
+   * @memberof SmartSequence
+   */
   private readonly merge?: (list: T[]) => T[];
+
+  /**
+   * An iterable collection of elements to iterate over.
+   * This property is required and defaults to an empty array.
+   *
+   * @private
+   * @readonly
+   * @type {Iterable<T>}
+   * @memberof SmartSequence
+   * @default []
+   */
   private readonly collection: Iterable<T>;
+
+  /**
+   * Creates an instance of SmartSequence.
+   *
+   * @param {ISmartSequence<T>} [opts] - An optional object that may define a collection and merge function
+   * @memberof SmartSequence
+   */
   constructor(opts?: ISmartSequence<T>) {
     this.merge = opts?.merge;
     this.collection = opts?.collection ?? [];
   }
 
+  /**
+   * Returns an iterator for the SmartSequence object.
+   *
+   * @returns {{next(): IteratorResult<T, unknown>;}} - The iterator object which has a `next()` method for retrieving elements.
+   * @memberof SmartSequence
+   */
   [Symbol.iterator](): Iterator<T, unknown, undefined> {
     let [iterator, meta] = this.smartIterator(undefined);
 
@@ -32,6 +96,14 @@ export class SmartSequence<T> implements Iterable<T> {
     };
   }
 
+  /**
+   * A private method that returns an iterator object based on the options provided
+   *
+   * @private
+   * @param {(undefined | number | Iterator<T, unknown, undefined>)} meta - An optional value representing metadata for the iterator sequence
+   * @returns {[Iterator<T, unknown, undefined>, Iterator<T, unknown, undefined> | number]} - A tuple containing an iterator object and optional metadata
+   * @memberof SmartSequence
+   */
   private smartIterator(
     meta: undefined | number | Iterator<T, unknown, undefined>
   ): readonly [

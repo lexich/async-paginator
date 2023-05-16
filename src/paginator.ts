@@ -2,6 +2,17 @@ import { PaginationAsyncError } from './errors';
 import { paginatorUnordered } from './paginatorUnordered';
 import { IPaginatorParams } from './types';
 
+/**
+ * Returns an async iterator that paginates over the given iterable data, transforms each value with the provided `transform` function, and returns pagination errors (if any) in place of their corresponding transformed values.
+ *
+ * @function
+ * @template T - The type of items in the iterable data.
+ * @template O - The type of the transformed items.
+ * @param {Iterable<T> | T[]} iterableData - The iterable data to be paginated.
+ * @param {(item: T) => Promise<O>} transform - The transformation function applied to each item.
+ * @param {IPaginatorParams} options - The optional pagination parameters.
+ * @returns {AsyncIterable<O | PaginationAsyncError<O>>} Async iterable of transformed items or pagination errors.
+ */
 export function paginator<T, O>(
   iterableData: Iterable<T> | T[],
   transform: (item: T) => Promise<O>,
